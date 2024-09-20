@@ -189,3 +189,14 @@ header h1 {
     font-size: 1.2em;
     margin-left: 10px;
 }
+
+#logout-icon, #danger-icon {
+    color: #ffcc00;
+    font-size: 1.2em;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#logout-icon:hover, #danger-icon:hover {
+    color: #ff9900;
+}

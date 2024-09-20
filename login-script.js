@@ -15,7 +15,7 @@ loginButton.addEventListener('click', function() {
     if (USERS[username] && USERS[username] === password) {
         // Successful login
         localStorage.setItem('currentUser', username); // Store the username
-        window.location.href = 'index.html'; // Redirect to chat page
+        window.location.href = 'chat.html'; // Redirect to chat page
     } else {
         // Failed login
         errorMessage.classList.remove('hidden');

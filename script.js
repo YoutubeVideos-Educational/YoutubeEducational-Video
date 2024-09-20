@@ -87,8 +87,15 @@ const dangerIcon = document.getElementById("danger-icon");
 
 // Add click event listener to the danger icon
 dangerIcon.addEventListener("click", function() {
-    // Clear all messages
     clearAllMessages();
-    // Redirect to login.html
-    window.location.href = 'login.html';
+    window.location.href = 'index.html'; // Redirects to login page
+});
+
+// Get reference to the logout icon
+const logoutIcon = document.getElementById("logout-icon");
+
+// Add click event listener to the logout icon
+logoutIcon.addEventListener("click", function() {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'index.html';
 });
