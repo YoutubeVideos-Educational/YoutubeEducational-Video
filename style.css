@@ -200,3 +200,37 @@ header h1 {
 #logout-icon:hover, #danger-icon:hover {
     color: #ff9900;
 }
+
+/* Online users styles */
+#online-users {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#online-users h3 {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    color: #075e54;
+}
+
+#users-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#users-list li {
+    display: inline-block;
+    background-color: #25D366;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#users-list li.current-user {
+    background-color: #128C7E;
+}

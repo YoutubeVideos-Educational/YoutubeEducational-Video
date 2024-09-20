@@ -19,9 +19,50 @@ const database = firebase.database();
 const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-button");
 const messagesList = document.getElementById("messages");
+const usersList = document.getElementById("users-list");
+const logoutIcon = document.getElementById("logout-icon");
 
 // Get the current user from localStorage
 const currentUser = localStorage.getItem('currentUser');
+
+// Function to update user's online status
+function updateOnlineStatus(status) {
+    if (currentUser) {
+        database.ref('users/' + currentUser).set({
+            online: status,
+            lastSeen: firebase.database.ServerValue.TIMESTAMP
+        });
+    }
+}
+
+// Set user as online when they open the chat
+updateOnlineStatus(true);
+
+// Set user as offline when they close the tab/window
+window.addEventListener('beforeunload', () => {
+    updateOnlineStatus(false);
+});
+
+// Listen for online users
+database.ref('users').on('value', (snapshot) => {
+    console.log('Users data:', snapshot.val());
+    usersList.innerHTML = ''; // Clear the list
+    snapshot.forEach((childSnapshot) => {
+        const user = childSnapshot.key;
+        const status = childSnapshot.val().online;
+        console.log('User:', user, 'Status:', status);
+        if (status) {
+            const listItem = document.createElement('li');
+            listItem.textContent = user;
+            if (user === currentUser) {
+                listItem.classList.add('current-user');
+            }
+            usersList.appendChild(listItem);
+            console.log('Added user to list:', user);
+        }
+    });
+    console.log('Final users list HTML:', usersList.innerHTML);
+});
 
 // Send a new message to Firebase
 sendButton.addEventListener("click", function () {
@@ -91,11 +132,9 @@ dangerIcon.addEventListener("click", function() {
     window.location.href = 'index.html'; // Redirects to login page
 });
 
-// Get reference to the logout icon
-const logoutIcon = document.getElementById("logout-icon");
-
-// Add click event listener to the logout icon
+// Modify the logout function to update online status
 logoutIcon.addEventListener("click", function() {
+    updateOnlineStatus(false);
     localStorage.removeItem('currentUser');
     window.location.href = 'index.html';
 });
