@@ -23,13 +23,31 @@
         </div>
         <div id="input-area">
             <input type="text" id="message-input" placeholder="Type your message...">
+            <input type="file" id="image-input" accept="image/*" style="display: none;">
+            <button id="image-upload-button"><i class="fas fa-image"></i></button>
             <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="edit-modal-close">&times;</span>
+            <h2>Edit Message</h2>
+            <textarea id="edit-message-input"></textarea>
+            <button id="save-edit-button">Save</button>
         </div>
     </div>
 
     <!-- Use non-modular version of Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="script.js"></script>
     <script>
         // Add this at the beginning of your script.js or in a separate script tag
